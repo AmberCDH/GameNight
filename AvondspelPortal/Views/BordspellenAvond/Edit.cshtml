@@ -1,0 +1,78 @@
+﻿@model Avondspel.Domain.BordspellenAvond
+
+@{
+    ViewData["Title"] = "Edit Bordspel";
+}
+
+<div class="card w-100">
+    <div class="card-header">
+        <h1>BordspellenAvond Updaten</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="form-label" asp-for="Planning">Plan een datum</label>
+                <div><span asp-validation-for="Planning" class="text-danger"></span></div>
+                <input class="form-control" asp-for="Planning" type="datetime-local" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="Straat">Straat</label>
+                <div><span asp-validation-for="Straat" class="text-danger"></span></div>
+                <input class="form-control" asp-for="Straat" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="Stad">Stad</label>
+                <div><span asp-validation-for="Stad" class="text-danger"></span></div>
+                <input class="form-control" asp-for="Stad" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="Huisnummer">Huisnummer</label>
+                <div><span asp-validation-for="Huisnummer" class="text-danger"></span></div>
+                <input class="form-control" asp-for="Huisnummer" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="AantalSpelers">AantalSpelers</label>
+                <div><span asp-validation-for="AantalSpelers" class="text-danger"></span></div>
+                <input class="form-control" asp-for="AantalSpelers" />
+            </div>
+            <div class="form-group">
+                <span asp-validation-for="AchtienPlus" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label class="form-label">Moeten spelers ouder dan achtien zijn?</label>
+                <input asp-for="AchtienPlus" class="form-check" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <input type="hidden" asp-for="GebruikerId" />
+        </form>
+    </div>
+</div>
+
+<div class="card w-100 mt-2">
+    <div class="card-header">
+        <h1>Bordspellen verwijderen uit de avond</h1>
+    </div>
+    <div class="card-body">
+        @if (ViewBag.bordspellen != null)
+        {
+            @foreach (Avondspel.Domain.Bordspel b in ViewBag.bordspellen)
+            {
+                <div class="row">
+                    <partial name="_BordspellenAanwezig" model="b" />
+                    <form asp-action="DeleteBordspel" method="post">
+                        <input type="hidden" name="bordspelId" value="@b.Id" />
+                        <input type="hidden" name="spelavondId" value="@Model.Id" />
+                        <button class="btn btn-danger mt-0 mb-2">Delete</button>
+                    </form>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

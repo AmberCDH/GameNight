@@ -1,0 +1,73 @@
+﻿@model Avondspel.Domain.Gebruiker
+
+@{
+    ViewData["Title"] = "Profiel";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card mb-3">
+                <div class="card-header">Je profiel</div>
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(model => model.Name)</h5>
+                    <p class="card-text">Mail: @Html.DisplayFor(model => model.Email)</p>
+                    <p class="card-text">Geslacht: @Html.DisplayFor(model => model.Gender)</p>
+                    <p class="card-text">Geboortedatum: @Html.DisplayFor(model => model.Birthday)</p>
+                    <p class="card-text">Adres: @Html.DisplayFor(model => model.Street) @Html.DisplayFor(model => model.HouseNumber), @Html.DisplayFor(model => model.City)</p>
+                    <p class="mb-0">Dieet:</p>
+                    @if (Model.Lactose == true)
+                    {
+                        <p class="mb-0">Lactose allergie</p>
+                    }
+                    @if (Model.Alcohol == true)
+                    {
+                        <p class="mb-0">Drinkt geen alcohol</p>
+                    }
+                    @if (Model.Notenallergie == true)
+                    {
+                        <p class="mb-0">Noten allergie</p>
+                    }
+                    @if (Model.Vega == true)
+                    {
+                        <p class="mb-0">Vegatarisch</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-start">
+        <div class="col-md-6 mb-4">
+            <h4 class="font-weight-bold">Jouw avonden die gepland staan</h4>
+            @if (ViewBag.lijstAvonden != null)
+            {
+                @foreach (var item in ViewBag.lijstAvonden)
+                {
+                    <partial name="_Avonden" model="item" />
+                }
+            }
+            else
+            {
+                <partial name="_ErrorLijstLeeg" />
+            }
+
+            <a asp-action="Gebruiker" asp-controller="BordspellenAvond">jouw lijst</a>
+        </div>
+        <div class="col-md-6">
+            <h4 class="font-weight-bold">Avonden waar jij aan meedoet</h4>
+            @if (ViewBag.lijstAvondenMetGebruiker != null)
+            {
+                @foreach (var item in ViewBag.lijstAvondenMetGebruiker)
+                {
+                    <partial name="_Avonden" model="item" />
+                }
+            }
+            else
+            {
+                <partial name="_ErrorLijstLeeg" />
+            }
+
+            <a asp-action="GebruikerInAvonden" asp-controller="BordspellenAvond">lijsten waar je inzit</a>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="card w-100">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-auto me-auto">
+                <a asp-controller="Bordspel" asp-action="Index" class="btn btn-primary">Bordspellen</a>
+            </div>
+            <div class="col-auto">
+                <a asp-controller="BordspellenAvond" asp-action="Index" class="btn btn-primary">Avonden</a>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="text-center fs-1 mt-1 mb-5">
+                Welkom @ViewBag.gebruiker
+            </div>
+        </div>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="row">
+                <div class="col-auto me-auto">
+                    <a asp-controller="Home" asp-action="Login" class="btn btn-primary">Login</a>
+                </div>
+                <div class="col-auto">
+                    <a asp-controller="Home" asp-action="Registreren" class="btn btn-primary">Meld je aan</a>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

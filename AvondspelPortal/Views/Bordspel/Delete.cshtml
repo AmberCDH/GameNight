@@ -1,0 +1,37 @@
+﻿@model Avondspel.Domain.Bordspel
+
+@{
+    ViewData["Title"] = "Delete Bordspel";
+}
+
+<h1>Bordspellen details</h1>
+
+<div>
+    <hr />
+    <dl class="column">
+        <dt class="col-sm-1">
+            <img src="data:image/png;png;base64,@Model.foto" />
+        </dt>
+        <dd class="col-sm-1">
+            @Html.DisplayFor(model => model.Naam)
+        </dd>
+        <dt class="col-sm-1">
+            @Html.DisplayFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-1">
+            @Html.DisplayFor(model => model.genre)
+        </dd>
+        <dd class="col-sm-1">
+            @Html.DisplayFor(model => model.soortSpel)
+        </dd>
+        <div class="ms-3 me-3 mb-2">
+            @Html.DisplayFor(model => model.AchtienPlus)
+        </div>
+    </dl>
+</div>
+<div>
+    <form asp-action="Delete" method="post" asp-route-id="@Model.Id">
+        <button onclick="return confirm('Wil je @Model.Naam verwijderen?')">Delete</button>
+    </form>
+    <a asp-action="Index">Back to List</a>
+</div>

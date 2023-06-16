@@ -1,0 +1,22 @@
+﻿<script>
+    $(function () {
+        $('#btnSave').click(function (e) {
+            e.preventDefault();
+            $('#confirmDialog').dialog('open');
+        });
+
+        $("#confirmDialog").dialog({
+            autoOpen: false,
+            modal: true,
+            resizable: false,
+            buttons: {
+                "Delete": function () {
+                    $('#Delete').submit();
+                },
+                "Cancel": function (e) {
+                    $(this).dialog("close");
+                }
+            }
+        })
+    })
+</script>

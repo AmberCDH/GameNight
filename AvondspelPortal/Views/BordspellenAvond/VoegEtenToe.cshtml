@@ -1,0 +1,29 @@
+﻿@model Avondspel.Domain.BordspellenAvond
+
+<div class="card w-100">
+    <div class="card-header">
+        <h1>Voeg eten toe en doe mee!</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="VoegEtenToe" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewBag.eten != null)
+            {
+                <div class="form-group mt-2">
+                    <label class="form-label">Eten:</label>
+                    @if(ViewBag.warning != null){
+                        <label>Je moet iets bijdragen!</label>
+                    }
+                    <select class="form-select" asp-items="ViewBag.eten" multiple name="etenLijst"></select>
+                </div>
+            }
+            <div class="form-group mt-2">
+                <input type="submit" value="Doe Mee!" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

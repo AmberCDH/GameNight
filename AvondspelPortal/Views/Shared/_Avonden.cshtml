@@ -1,0 +1,14 @@
+﻿@model Avondspel.Domain.BordspellenAvond
+    <div class="card h-100 mt-3" style="padding: 1px">
+            <div class="card-header">
+            <a asp-action="Details" asp-controller="BordspellenAvond" asp-route-id="@Model.Id">
+                <h4>Locatie: @Html.DisplayFor(model => model.Straat) @Html.DisplayFor(model => model.Huisnummer), @Html.DisplayFor(model => model.Stad)</h4>
+                </a>
+        </div>
+        <div class="card-body">
+            <h6 class="card-subtitle">Datum: @Model.Planning</h6>
+            <h6 class="card-text">Aantal spelers: @Model.AantalSpelers</h6>
+        </div>
+        <div class="card-actions, card-actions-vertical">
+        </div>
+    </div>

@@ -1,0 +1,34 @@
+﻿@model Avondspel.Domain.BordspellenAvond
+
+@{
+    ViewData["Title"] = "BordspellenAvondGebruikerInAvond";
+}
+<!DOCTYPE html>
+<html>
+<div class="container">
+<h1>BordspellenAvonden waar jij inzit</h1>
+
+<a asp-action="Index">
+    <button type="button" class="btn btn-primary btn-lg mb-3">Doe mee aan een avond</button>
+</a>
+
+
+    <div class="row">
+        @if (@ViewBag.lijstAvondenMetGebruiker != null)
+        {
+            @foreach (var item in @ViewBag.lijstAvondenMetGebruiker)
+            {
+                <div class="col-lg-3 mb-4">
+                    <partial name="_Avonden" model="item" />
+                </div>
+            }
+        }
+        else
+        {
+            <partial name="_ErrorLijstLeeg" />
+        }
+
+        <a asp-action="Index" asp-controller="BordspellenAvond">alle avonden</a>
+    </div>
+</div>
+</html>

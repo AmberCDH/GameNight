@@ -1,0 +1,18 @@
+﻿@model Avondspel.Domain.Bordspel
+
+<div class="col-sm-3 mb-4">
+    <div class="card  h-100">
+        <div class="card-body">
+            <a asp-action="Details" asp-controller="Bordspel" asp-route-id="@Model.Id">
+                <img style="max-height: 300px;" class="card-img-top" src="data:image/png;png;base64,@Model.foto" alt="@Model.Naam (foto)" />
+            </a>
+        </div>
+        <div class="card-body">
+            <a asp-action="Details" asp-controller="Bordspel" asp-route-id="@Model.Id">
+                <h5 class="card-title">@Model.Naam</h5>
+            </a>
+        </div>
+        <div class="card-actions, card-actions-vertical">
+        </div>
+    </div>
+</div>

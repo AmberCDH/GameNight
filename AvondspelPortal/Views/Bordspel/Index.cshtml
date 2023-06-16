@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Avondspel.Domain.Bordspel>
+
+@{
+    ViewData["Title"] = "BordspellenIndex";
+}
+<!DOCTYPE html>
+<html>
+<h1>Toegevoegde bordspellen</h1>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-action="Create">
+        <button type="button" class="btn btn-primary btn-lg mb-3">Maak een bordspel aan</button>
+    </a>
+}
+
+
+<div class="card-deck">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <partial name="_BordspellenAanwezig" model="item" />
+        }
+    </div>
+</div>
+</html>

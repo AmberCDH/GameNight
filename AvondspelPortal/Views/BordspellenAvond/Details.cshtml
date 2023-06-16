@@ -1,0 +1,210 @@
+﻿@model Avondspel.Domain.BordspellenAvond
+@{
+    ViewData["Title"] = "Details BordspellenAvond";
+}
+
+
+
+<div class="card">
+    <div class="card-header">
+        <h1>BordspellenAvond details</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <dl class="col-sm-3 mb-3 mt-2 ms-2">
+
+                <p class="fw-bold mb-0 ">Datum:</p>
+                <p class="me-3">
+                    @Html.DisplayFor(model => model.Planning)
+                </p>
+                <p class="fw-bold mb-0 ">Adres:</p>
+                <p class="me-3">
+                    @Html.DisplayFor(model => model.Straat) @Html.DisplayFor(model => model.Huisnummer), @Html.DisplayFor(model => model.Stad)
+                </p>
+                <p class="fw-bold mb-0">Max aantal mensen:</p>
+                <p class="me-3">
+                    @Html.DisplayFor(model => model.AantalSpelers)
+                </p>
+                <p class="fw-bold mb-0">Potluck:</p>
+                <div class="me-3 mb-3">
+                    @if (Model.PotLuck == true)
+                    {
+                        <p class="mb-0">PotLuck aan</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
+                            <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" />
+                        </svg>
+                    }
+                    else
+                    {
+                        <p class="mb-0">Potluck uit</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
+                            <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z" />
+                        </svg>
+                    }
+                </div>
+                <dd class="col">
+                    <p class="fw-bold mb-0">Achtien plus:</p>
+                    <div class="me-3 mb-3">
+                        @if (Model.AchtienPlus == true)
+                        {
+                            <p class="mb-0">Achtien plus</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
+                                <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" />
+                            </svg>
+                        }
+                        else
+                        {
+                            <p class="mb-0">Voor iedereen</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
+                                <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z" />
+                            </svg>
+                        }
+                    </div>
+                </dd>
+            </dl>
+
+            <div class="col-sm-6 mb-0-3">
+                <table class="table table-sm table-striped table-bordered mt-3">
+                    <thead>
+                        <tr><th>Naam</th><th>Email</th><th>Geboortedatum</th></tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Gebruikers != null)
+                        {
+                            @foreach (var gebruiker in Model.Gebruikers)
+                            {
+                                <partial name="_UsersJoining" model="gebruiker" />
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row ms-1 me-1">
+        @foreach (var item in ViewBag.BordspelLijst)
+        {
+            <partial name="_BordspellenAanwezig" model="item" />
+        }
+    </div>
+    <div class="row ms-3 me-3">
+        <table class="table table-sm table-striped table-bordered mt-3">
+            <thead>
+                <tr><th>Naam van eten</th><th>Lactose</th><th>Noten</th><th>Vlees</th><th>Alcohol</th>
+            </thead>
+            <tbody>
+                @if (Model.EtenLijst != null)
+                {
+                    @foreach (var eten in Model.EtenLijst)
+                    {
+                        <partial name="_EtenAanwezig" model="eten" />
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col mb-3 ms-3 me-3">
+            @if (Model.EtenLijst != null)
+            {
+                @if (Model.EtenLijst.Any())
+                {
+                    bool Lactose = false;
+                    bool NotenAllergie = false;
+                    bool Vega = false;
+                    bool Alcohol = false;
+                    @foreach (var eten in Model.EtenLijst)
+                    {
+                        if (eten.Lactose)
+                        {
+                            Lactose = true;
+                        }
+                        if (eten.Notenallergie)
+                        {
+                            NotenAllergie = true;
+                        }
+                        if (eten.Vega)
+                        {
+                            Vega = true;
+                        }
+                        if (eten.Alcohol)
+                        {
+                            Alcohol = true;
+                        }
+                    }
+                    @if (ViewBag.Gebruiker != null)
+                    {
+                        if (ViewBag.Gebruiker.Lactose == Lactose)
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                Let op het eten bevat lactose
+                            </div>
+                        }
+                        if (ViewBag.Gebruiker.Notenallergie == NotenAllergie)
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                Let op het eten bevat noten
+                            </div>
+                        }
+                        if (ViewBag.Gebruiker.Vega == Vega)
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                Let op het eten kan vlees bevatten
+                            </div>
+                        }
+                        if (ViewBag.Gebruiker.Alcohol == Alcohol)
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                Let op er is alcohol aanwezig
+                            </div>
+                        }
+                    }
+
+                }
+                @if (!@ViewBag.isOwner)
+                {
+                    @if (Model.PotLuck == false)
+                    {
+
+                        <form asp-action="DoeMee" method="post" asp-route-id="@Model?.Id">
+                            <button class="btn btn-primary" onclick="return confirm('Wil je meedoen op @Model?.Planning?')">Doe Mee!</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary" asp-action="VoegEtenToe" asp-route-id="@Model.Id">Doe mee en neem iets te eten mee</a>
+                    }
+                }
+
+
+            }
+
+        </div>
+    </div>
+</div>
+<div>
+    @if (Model != null)
+    {
+        @if (ViewBag.isEmpty && ViewBag.isOwner)
+        {
+            <div class="row mt-2 mb-2">
+                <div class="col-sm-5 col-md-1 mb-2">
+                    <a class="btn btn-primary " asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                </div>
+                <div class="col-sm-5 offset-sm-2 col-md-1 offset-md-0">
+                    <form asp-action="Delete" method="post" asp-route-id="@Model?.Id">
+                        <button class="btn btn-danger" onclick="return confirm('Wil je @Model?.Planning verwijderen?')">Delete</button>
+                    </form>
+                </div>
+
+
+            </div>
+
+
+        }
+    }
+
+    <a asp-action="Index">Terug naar BordspellenAvonden</a>
+</div>

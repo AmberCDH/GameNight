@@ -1,0 +1,59 @@
+﻿@model Avondspel.Domain.Bordspel
+
+@{
+    ViewData["Title"] = "Details Bordspel";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1>Bordspellen details</h1>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-sm-5 col-md-6">
+                <div class="ms-3 me-3 mb-2 text-center">
+                    <img src="data:image/png;png;base64,@Model.foto" style="height:300px; width:auto" />
+                </div>
+            </div>
+            <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+                <h1 class="ms-3">@Model.Naam</h1>
+                <p class="fw-bold mb-0 ms-3">Speluitleg:</p>
+                <p class="me-3 ms-3">
+                    @Html.DisplayFor(model => model.Description)
+                </p>
+                <p class="fw-bold mb-0 ms-3">Genre:</p>
+                <p class="me-3 ms-3 ms-3">
+                    @Html.DisplayFor(model => model.genre)
+                </p>
+                <p class="fw-bold mb-0 ms-3">Soortspel:</p>
+                <p class="me-3 ms-3">
+                    @Html.DisplayFor(model => model.soortSpel)
+                </p>
+                <p class="fw-bold mb-0 ms-3">Achtien plus:</p>
+                <div class="me-3 ms-3 mb-3">
+                    @if (Model.AchtienPlus == true)
+                    {
+                        <p class="mb-0">Achtien plus</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
+                            <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" />
+                        </svg>
+                    }
+                    else
+                    {
+                        <p class="mb-0">Voor iedereen</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
+                            <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z" />
+                        </svg>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <form asp-action="Delete" method="post" asp-route-id="@Model?.Id">
+        <button onclick="return confirm('Wil je @Model?.Naam verwijderen?')">Delete</button>
+    </form>
+    <a asp-action="Index">Back to List</a>
+</div>

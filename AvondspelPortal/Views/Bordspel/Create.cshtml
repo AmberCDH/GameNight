@@ -1,0 +1,84 @@
+﻿@model Avondspel.Domain.Bordspel
+@using Avondspel.Domain.Enum
+
+@{
+    ViewData["Title"] = "Create Bordspel";
+}
+
+<div class="card w-100">
+    <div class="card-header">
+        <h1>Bordspellen Create</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <span asp-validation-for="Naam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Naam" class="form-label"></label>
+                <input asp-for="Naam" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" class="form-control" />
+            </div>
+            <div class="form-group">
+                <span asp-validation-for="soortSpel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="soortSpel" class="form-label"></label>
+                <div class="row">
+                    <div class="col">
+                        <select asp-for="soortSpel" asp-items="Html.GetEnumSelectList<SoortSpel>()">
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span asp-validation-for="genre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="genre" class="form-label"></label>
+                <div class="row">
+                    <div class="col">
+                        <select asp-for="genre" asp-items="Html.GetEnumSelectList<Genre>()">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <label class="form-label">Moeten spelers ouder dan achtien zijn?</label>
+                <input asp-for="AchtienPlus" class="form-check" />
+            </div>
+
+            <div class="form-group mt-4">
+                <label asp-for="foto" class="form-label"></label>
+                <input asp-for="foto" type="file"
+                       name="imageFile"
+                       accept="image/png" />
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

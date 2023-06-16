@@ -1,0 +1,97 @@
+﻿@model Avondspel.Portal.Models.LoginViewModel
+@using Avondspel.Domain.Enum
+
+<div class="card w-100">
+    <div class="card-header">
+        <h1>Registreren</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="Registreren" asp-controller="Home" method="post">
+            <div asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label class="form-label" asp-for="Name">Naam</label>
+                <div><span asp-validation-for="Name" class="text-danger"></span></div>
+                <input class="form-control" asp-for="Name" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="Email"></label>
+                <div><span asp-validation-for="Email" class="text-danger"></span></div>
+                <input class="form-control" asp-for="Email" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="Gender"></label>
+                <div class="row">
+                    <div class="col">
+                        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Geslacht>()">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="Birthday">Geboortedatum</label>
+                <div><span asp-validation-for="Birthday" class="text-danger"></span></div>
+                <input class="form-control" asp-for="Birthday" type="date" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="Street">Straat</label>
+                <div><span asp-validation-for="Street" class="text-danger"></span></div>
+                <input class="form-control" asp-for="Street" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="City">Stad</label>
+                <div><span asp-validation-for="City" class="text-danger"></span></div>
+                <input class="form-control" asp-for="City" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="HouseNumber">Huisnummer</label>
+                <div><span asp-validation-for="HouseNumber" class="text-danger"></span></div>
+                <input class="form-control" asp-for="HouseNumber" />
+            </div>
+            <div class="form-group  mb-3">
+                <label class="form-label" asp-for="Password"></label>
+                <div><span asp-validation-for="Password" class="text-danger"></span></div>
+                <input class="form-control" asp-for="Password" />
+            </div>
+
+            <div class="list-group mb-3">
+                <label class="list-group-item" asp-for="Lactose">
+                    <input class="form-check-input me-1" type="checkbox" asp-for="Lactose">
+                    Lactose
+                </label>
+                <div><span asp-validation-for="Lactose" class="text-danger"></span></div>
+            </div>
+
+            <div class="list-group mb-3">
+                <label class="list-group-item" asp-for="Notenallergie">
+                    <input class="form-check-input me-1" type="checkbox" asp-for="Notenallergie">
+                    Notenallergie
+                </label>
+                <div><span asp-validation-for="Notenallergie" class="text-danger"></span></div>
+            </div>
+
+            <div class="list-group mb-3">
+                <label class="list-group-item" asp-for="Vega">
+                    <input class="form-check-input me-1" type="checkbox" asp-for="Vega">
+                    veganist / vegetariër
+                </label>
+                <div><span asp-validation-for="Vega" class="text-danger"></span></div>
+            </div>
+
+            <div class="list-group mb-3">
+                <label class="list-group-item" asp-for="Alcohol">
+                    <input class="form-check-input me-1" type="checkbox" asp-for="Alcohol">
+                    Geen Alcohol
+                </label>
+                <div><span asp-validation-for="Alcohol" class="text-danger"></span></div>
+            </div>
+            <div class="row">
+                <div class="col align-self-start">
+                    <button class="btn btn-primary" type="submit">Registreren</button>
+                </div>
+                <div class="col-auto">
+                    <a asp-action="Login" asp-controller="Home" class="btn btn-primary ">Login</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
